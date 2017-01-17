@@ -24,17 +24,35 @@
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">Home</a></li>
             <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+
+              {% if user.is_authenticated %}
+                <li role="presentation"><a href="{% url 'logout' %}">Log out</a></li>
+
+              {% else %}
+                <li role="presentation"><a href="{% url 'login' %}">Log in</a></li>
+
+              {% endif %}
+
           </ul>
         </nav>
         <h3 class="text-muted">Photo Gallery</h3>
       </div>
 
-      <div class="jumbotron">
-        <h1>Welcome to the Photo Gallery!</h1>
-        <p class="lead">Please feel free to browse through the pictures & share your thoughts with each other!</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Register here!</a></p>
-      </div>
+          {% if user.is_authenticated %}
+            <div class="jumbotron">
+                <h1>Welcome to the Photo Gallery!</h1>
+                <p class="lead">Please feel free to browse through the pictures & share your thoughts with each other!</p>
+            </div>
+
+          {% else %}
+              <div class="jumbotron">
+                <h1>Welcome to the Photo Gallery!</h1>
+                <p class="lead">Please feel free to browse through the pictures & share your thoughts with each other!</p>
+
+                <p><a class="btn btn-lg btn-success" href="#" role="button">Register here!</a></p>
+              </div>
+          {% endif %}
+
 
       <div class="row marketing">
         <div class="col-lg-6">
