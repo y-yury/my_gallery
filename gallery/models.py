@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 #Ensuring image validation is performed on upload
@@ -12,9 +13,10 @@ def image_validation(fieldfile_obj):
 
 
 class Photo(models.Model):
-    title = models.CharField(max_length=250)
-    width = models.IntegerField(default=0)
-    height = models.IntegerField(default=0)
+    author = models.OneToOneField(User, unique=True, null=True)
+    title = models.CharField(max_length=250, null=True)
+    width = models.IntegerField(default=0, null=True)
+    height = models.IntegerField(default=0, null=True)
     image = models.ImageField(upload_to='images/', null=False, blank=False, width_field="width", height_field="height",
                               validators=[image_validation])
     timestamp = models.DateTimeField(default=timezone.now, auto_now=False)
