@@ -12,16 +12,26 @@ def image_validation(fieldfile_obj):
         raise ValidationError("Sorry, maximum filesize allowed is {}Mb.".format(upload_limit))
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, related_name='user', unique=True, null=True)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    country = models.CharField(max_length=50, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Photo(models.Model):
-    author = models.OneToOneField(User, unique=True, null=True)
+    author = models.ForeignKey('gallery.Profile', related_name='profile')
     title = models.CharField(max_length=250, null=True)
     width = models.IntegerField(default=0, null=True)
     height = models.IntegerField(default=0, null=True)
-    image = models.ImageField(upload_to='images/', null=False, blank=False, width_field="width", height_field="height",
-                              validators=[image_validation])
+    image = models.ImageField(upload_to='images/', null=False, blank=False, width_field="width",
+                              height_field="height", validators=[image_validation])
     timestamp = models.DateTimeField(default=timezone.now, auto_now=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
