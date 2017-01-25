@@ -25,8 +25,9 @@ SECRET_KEY = '(=)*%(jr)4ul_q%6^hi_yxoh91_nq_disil^&%%#%-z4-(u+a_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.3', 'mighty-garden-22654.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 # Application definition
 
