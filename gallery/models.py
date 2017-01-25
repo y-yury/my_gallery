@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from django.conf import settings
+from django.contrib.auth.models import User
 
 
 #Ensuring image validation is performed on upload
@@ -13,7 +13,7 @@ def image_validation(fieldfile_obj):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user', unique=True, blank=True, null=True)
+    user = models.ForeignKey(User, related_name='user', unique=True, null=True)
     name = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=50, null=True, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
