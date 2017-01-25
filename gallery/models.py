@@ -13,7 +13,7 @@ def image_validation(fieldfile_obj):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, related_name='user', unique=True, null=True)
+    user = models.OneToOneField(User, related_name='user', unique=True, null=True)
     name = models.CharField(max_length=50, null=True, blank=True)
     city = models.CharField(max_length=50, null=True, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
