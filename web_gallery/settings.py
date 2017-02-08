@@ -25,7 +25,13 @@ SECRET_KEY = '(=)*%(jr)4ul_q%6^hi_yxoh91_nq_disil^&%%#%-z4-(u+a_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '127.0.0.2']
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'y_yury'
+EMAIL_HOST_PASSWORD = 'Feb022017'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 

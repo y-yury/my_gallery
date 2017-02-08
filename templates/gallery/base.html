@@ -26,6 +26,7 @@
             <li role="presentation"><a href="#">About</a></li>
 
               {% if user.is_authenticated %}
+                <li role="presentation"><a href="{% url 'contact_me' %}">Contact Me</a></li>
                 <li role="presentation"><a href="{% url 'logout' %}">Log out</a></li>
 
               {% endif %}
