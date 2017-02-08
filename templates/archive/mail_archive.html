@@ -1,0 +1,7 @@
+<p><h1>Here's the listing of all e-mails submitted via this interface:</h1></p>
+
+{% for mail in all_mail %}
+    <ul>
+        <li>User '{{ mail.name }}' submitted '{{ mail.message }}'on {{ mail.date_submitted }}</li>
+    </ul>
+{% endfor %}

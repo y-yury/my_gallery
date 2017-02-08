@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.decorators import login_required
-from .models import Photo
+from .models import Photo, Email
 from .forms import ContactForm
 
 
@@ -14,6 +14,12 @@ class PhotoListView(ListView):
     template_name = 'gallery/base.html'
 
 
+def mail_archive(request):
+    all_mail = Email.objects.all()
+    return render(request, 'archive/mail_archive.html',
+                  {'all_mail': all_mail})
+
+
 @login_required
 def submit_email(request):
     if request.method == 'POST':
@@ -22,6 +28,7 @@ def submit_email(request):
         if form.is_valid():
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
+            form.save()
 
             try:
                 send_mail(subject, message, 'admin@myblog.com', ['y.sapozhkov@gmail.com'])
